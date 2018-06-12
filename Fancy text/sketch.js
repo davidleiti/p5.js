@@ -12,7 +12,6 @@ function setup() {
     reset();
 }
 
-
 function reset(){
     x = ceil(displayText.length / 2);
     textSize(256 - (displayText.length * 9));
@@ -26,12 +25,13 @@ function reset(){
 function draw() {
     background(51);
     vehicles.forEach(function(vehicle){
-        vehicle.behavior();
+        vehicle.adjustMovement();
         vehicle.update();
-        vehicle.show();
+        vehicle.display();
     });
 }
 
+// Modify displayed text to show user input
 function buttonHandler(){
     displayText = document.getElementById("t").value;
     reset();
