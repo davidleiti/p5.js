@@ -7,7 +7,7 @@ var pointLabel;
 function setup(){
     createCanvas(700, 700);
     swarm = new Swarm(200, -350, 350, -350, 350);
-    controller = new Controller(swarm, 150, 0.7, 1.0, 2.5);
+    controller = new Controller(swarm, 100, 0.7, 1.0, 2.5);
     scoreLabel = document.getElementById("lowestFitness");
     pointLabel = document.getElementById("point");
 }
