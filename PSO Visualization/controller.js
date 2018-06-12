@@ -1,6 +1,7 @@
 class Controller{
-    constructor(swarm, w, c1, c2){
+    constructor(swarm, neighborhoodSize, w, c1, c2){
         this.swarm = swarm;
+        this.neighborhoodSize = neighborhoodSize;
         this.w = w;
         this.c1 = c1;
         this.c2 = c2;
@@ -8,7 +9,7 @@ class Controller{
 
     updateVelocities(){
         let bestNeighbors = []
-        let neighborhoods = this.swarm.getNeighbourhoods(50);
+        let neighborhoods = this.swarm.getNeighbourhoods(this.neighborhoodSize);
         for (var i = 0; i < this.swarm.population.length; i++) {
             let localNeighbors = neighborhoods[i];
             localNeighbors.sort(function(a, b){
@@ -38,12 +39,11 @@ class Controller{
         }
     }
 
+    bestParticle(){
+        return this.swarm.bestParticle();
+    }
+
     bestFitness(){
-        let values = [];
-        for (particle of this.swarm.population) {
-            values.push(particle.fitness)
-        }
-        sort(values);
-        return values[0];
+        return this.swarm.bestParticle().fitness;
     }
 }

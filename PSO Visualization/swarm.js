@@ -32,6 +32,14 @@ class Swarm{
         return neighborhoods
     }
 
+    bestParticle(){
+        let particles = this.population;
+        particles.sort(function(a,b){
+            return (a.fitness < b.fitness) ? -1 : ((a.fitness > b.fitness) ? 1 : 0);
+        });
+        return particles[0];
+    }
+
     avgFitness(){
         let s = 0.0;
         for (var i = 0; i < this.population.length; i++) {

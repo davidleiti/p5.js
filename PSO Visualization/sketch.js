@@ -2,12 +2,14 @@ var noParticles = 100;
 var swarm;
 var controller;
 var scoreLabel;
+var pointLabel;
 
 function setup(){
     createCanvas(700, 700);
-    swarm = new Swarm(100, -350, 350, -350, 350);
-    controller = new Controller(swarm, 0.3, 1.0, 2.5);
+    swarm = new Swarm(200, -350, 350, -350, 350);
+    controller = new Controller(swarm, 150, 0.7, 1.0, 2.5);
     scoreLabel = document.getElementById("lowestFitness");
+    pointLabel = document.getElementById("point");
 }
 
 function draw(){
@@ -20,7 +22,9 @@ function draw(){
         particle.move();
         drawParticle(particle);
     }
-    scoreLabel.innerHTML = "Lowest fitness score: " + controller.bestFitness();
+    let bestParticle = controller.bestParticle();
+    scoreLabel.innerHTML = "Lowest fitness score: " + bestParticle.fitness.toString();
+    pointLabel.innerHTML = "At point: " + bestParticle.pos.x + ", " + bestParticle.pos.y;
 }
 
 function drawParticle(particle){

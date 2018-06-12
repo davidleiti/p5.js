@@ -1,6 +1,12 @@
 class Particle{
     constructor(xmin, xmax, ymin, ymax){
         this.pos = createVector(Math.random() * (xmax - xmin) + xmin, Math.random() * (ymax - ymin) + ymin);
+        this.bounds = {
+            xmin: xmin,
+            xmax: xmax,
+            ymin: ymin,
+            ymax: ymax
+        };
         this.velocity = createVector(0,0);
         this.fitness = this.calculateFitness();
         this.bestVal = this.fitness;
@@ -17,8 +23,13 @@ class Particle{
     move(){
         let x = this.pos.x + this.velocity.x;
         let y = this.pos.y + this.velocity.y;
-        this.pos.x = x;
+        if (x >= this.bounds.xmax || x <= this.bounds.xmin || y >= this.bounds.ymax || y <= this.bounds.ymin){
+            x = random(this.bounds.xmin, this.bounds.xmax);
+            y = random(this.bounds.ymin + this.bounds.ymax);
+            console.log("x: ", x, "y: ", y);
+        }
         this.pos.y = y;
+        this.pos.x = x;
         this.fitness = this.calculateFitness();
         if (this.fitness < this.bestVal){
             this.bestVal = this.fitness;
